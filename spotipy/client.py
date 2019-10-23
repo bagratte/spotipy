@@ -686,7 +686,7 @@ class Spotify(object):
 
             Parameters:
                 - limit - the number of entities to return
-        '''        
+        '''
         return self._get('me/player/recently-played', limit=limit)
 
     def current_user_saved_albums_add(self, albums=[]):
@@ -699,12 +699,13 @@ class Spotify(object):
         r = self._put('me/albums?ids=' + ','.join(alist))
         return r
 
-    def user_follow_artists(self, ids=[]):
+    def user_follow_artists(self, artists=[]):
         ''' Follow one or more artists
             Parameters:
-                - ids - a list of artist IDs
+                - artists - a list of artist URIs, URLs or IDs
         '''
-        return self._put('me/following?type=artist&ids=' + ','.join(ids))
+        alist = [self._get_id('artist', a) for a in artists]
+        return self._put('me/following?type=artist&ids=' + ','.join(alist))
 
     def user_follow_users(self, ids=[]):
         ''' Follow one or more users

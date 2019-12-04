@@ -707,6 +707,14 @@ class Spotify(object):
         alist = [self._get_id('artist', a) for a in artists]
         return self._put('me/following?type=artist&ids=' + ','.join(alist))
 
+    def user_unfollow_artists(self, artists=[]):
+        ''' Unfollow one or more artists
+            Parameters:
+                - artists - a list of artist URIs, URLs or IDs
+        '''
+        alist = [self._get_id('artist', a) for a in artists]
+        return self._delete('me/following?type=artist&ids=' + ','.join(alist))
+
     def user_follow_users(self, ids=[]):
         ''' Follow one or more users
             Parameters:
